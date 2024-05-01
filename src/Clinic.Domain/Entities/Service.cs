@@ -12,5 +12,8 @@ namespace Clinic.Domain.Entities
         public string Name { get; set; }
         public decimal Price { get; set; }
         public string Description { get; set; }
+        public Guid ServiceTypeId { get; set; }
+        public virtual List<Feedback> Feedbacks { get; set; }
+        public virtual ServiceType ServiceType { get; set; }
     }
 }

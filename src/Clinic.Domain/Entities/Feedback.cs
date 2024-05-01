@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Clinic.Domain.Entities.Auth;
 
 namespace Clinic.Domain.Entities
 {
@@ -11,6 +7,12 @@ namespace Clinic.Domain.Entities
         public Guid Id { get; set; }
         public string? VideoPath { get; set; }
         public string Description { get; set; }
+        public Guid DoctorId { get; set; }
+        public Guid ServiceId { get; set; }
         public DateTimeOffset WritedDate { get; set; }
+        public virtual Doctor Doctor { get; set; }
+        public virtual Service Service { get; set; }
+        public virtual List<User> Users { get; set; }
+
     }
 }

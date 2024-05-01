@@ -14,6 +14,14 @@ namespace Clinic.Domain.Entities
         public int StartWork { get; set; }
         public string TUsername { get; set; }
         public string? PicturePath { get; set; }
-
+        public Guid SpecialistId { get; set; }
+        public Guid ServiceTypeId { get; set; }
+        public virtual Specialist Specialist { get; set; }
+        public virtual ServiceType ServiceType { get; set; }
+        public virtual List<Result> DoctorResults { get; set; }
+        public virtual List<Education> EducationDoctors { get; set; }
+        public virtual List<Diplom> DoctorDiploms { get; set; }
+        public virtual List<Skill> DoctorSkills { get; set; }
+        public virtual List<Feedback> DoctorFeedbacks { get; set; }
     }
 }
