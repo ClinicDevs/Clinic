@@ -12,36 +12,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Clinic.Domain\Clinic.Domain.csproj" />
-    <Folder Include="UseCases\Diplom\Handlers\CommandHandlers\" />
-    <Folder Include="UseCases\Diplom\Handlers\QueryHandlers\" />
-    <Folder Include="UseCases\Diplom\Queries\" />
-    <Folder Include="UseCases\Doctor\Handlers\CommandHandlers\" />
-    <Folder Include="UseCases\Doctor\Handlers\QueryHandlers\" />
-    <Folder Include="UseCases\Doctor\Queries\" />
-    <Folder Include="UseCases\Education\Handlers\CommandHandlers\" />
-    <Folder Include="UseCases\Education\Handlers\QueryHandlers\" />
-    <Folder Include="UseCases\Education\Queries\" />
-    <Folder Include="UseCases\FeedBack\Handlers\CommandHandlers\" />
-    <Folder Include="UseCases\FeedBack\Handlers\QueryHandlers\" />
-    <Folder Include="UseCases\FeedBack\Queries\" />
-    <Folder Include="UseCases\New\Handlers\CommandHandlers\" />
-    <Folder Include="UseCases\New\Handlers\QueryHandlers\" />
-    <Folder Include="UseCases\New\Queries\" />
-    <Folder Include="UseCases\Result\Handlers\CommandHandlers\" />
-    <Folder Include="UseCases\Result\Handlers\QueryHandlers\" />
-    <Folder Include="UseCases\Result\Queries\" />
-    <Folder Include="UseCases\Service\Handlers\CommandHandlers\" />
-    <Folder Include="UseCases\Service\Handlers\QueryHandlers\" />
-    <Folder Include="UseCases\Service\Queries\" />
-    <Folder Include="UseCases\Skill\Handlers\CommandHandlers\" />
-    <Folder Include="UseCases\Skill\Handlers\QueryHandlers\" />
-    <Folder Include="UseCases\Skill\Queries\" />
-    <Folder Include="UseCases\Specialist\Hendlers\CommandHendlers\" />
-    <Folder Include="UseCases\Specialist\Hendlers\QueryHendlers\" />
-    <Folder Include="UseCases\Specialist\Queries\" />
-    <Folder Include="UseCases\User\Handlers\CommandHandlers\" />
-    <Folder Include="UseCases\User\Handlers\QueryHandlers\" />
-    <Folder Include="UseCases\User\Queries\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="UseCases\" />
   </ItemGroup>
 
 </Project>
