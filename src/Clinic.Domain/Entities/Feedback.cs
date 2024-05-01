@@ -7,6 +7,7 @@ namespace Clinic.Domain.Entities
         public Guid Id { get; set; }
         public string? VideoPath { get; set; }
         public string Description { get; set; }
+        public bool IsDeleted { get; set; }
         public Guid DoctorId { get; set; }
         public Guid ServiceId { get; set; }
         public DateTimeOffset WritedDate { get; set; }
