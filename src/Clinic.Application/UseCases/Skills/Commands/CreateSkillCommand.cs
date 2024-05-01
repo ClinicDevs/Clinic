@@ -1,14 +1,16 @@
-﻿using System;
+﻿using Clinic.Domain.DTOs;
+using Clinic.Domain.Entities;
+using MediatR;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Clinic.Domain.Entities
+namespace Clinic.Application.UseCases.Skills.Commands
 {
-    public class Skill
+    public class CreateSkillCommand: IRequest<ResponseModel>
     {
-        public Guid Id { get; set; }
         public string Name { get; set; }
         public List<Doctor> DoctorSkills { get; set; }
         public bool IsDeleted { get; set; }
