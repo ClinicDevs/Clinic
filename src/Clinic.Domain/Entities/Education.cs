@@ -13,5 +13,6 @@ namespace Clinic.Domain.Entities
         public int StartYear { get; set; }
         public int EndYear { get; set; }
         public string Degree { get; set; }
+        public virtual List<Doctor> EducationDoctors { get; set; }
     }
 }

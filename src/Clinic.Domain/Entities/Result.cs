@@ -11,6 +11,8 @@ namespace Clinic.Domain.Entities
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string PhotoBefore { get; set; }
-        public string PhotoAfter { get; set;}
+        public string PhotoAfter { get; set; }
+        public Guid DoctorId { get; set; }
+        public virtual Doctor Doctor { get; set; }
     }
 }

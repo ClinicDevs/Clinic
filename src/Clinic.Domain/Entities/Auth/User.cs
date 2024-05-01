@@ -1,8 +1,9 @@
-﻿namespace Clinic.Domain.Entities.Auth
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace Clinic.Domain.Entities.Auth
 {
-    public class User
+    public class User : IdentityUser
     {
-        public Guid Id { get; set; }
         public string Firsname { get; set; }
         public string Lastname { get; set; }
     }
