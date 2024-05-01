@@ -27,9 +27,10 @@ namespace Clinic.Application.UseCases.Skills.Hendlers.QueryHnadlers
                 .Where(x => x.IsDeleted == false)
                     .FirstOrDefaultAsync(x => x.Id == request.Id);
 
+
             if (skill == null)
             {
-                throw new Exception("Not found ");
+                throw new Exception("Not found");
             }
 
             return skill;
