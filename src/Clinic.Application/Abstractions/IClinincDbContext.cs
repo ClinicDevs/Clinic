@@ -17,6 +17,6 @@ namespace Clinic.Application.Abstractions
         public DbSet<Skill> Skills { get; set; }
         public DbSet<Specialist> Specialists { get; set; }
 
-        public Task<int> SaveChangesAsync(CancellationToken cancellationToken);
+        public ValueTask<int> SaveChangesAsync(CancellationToken cancellationToken = default!);
     }
 }
