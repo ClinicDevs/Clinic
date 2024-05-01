@@ -12,7 +12,9 @@ namespace Clinic.Domain.Entities
         public string Name { get; set; }
         public string PhotoBefore { get; set; }
         public string PhotoAfter { get; set; }
+        public bool IsDeleted { get; set; } 
         public Guid DoctorId { get; set; }
         public virtual Doctor Doctor { get; set; }
+
     }
 }
