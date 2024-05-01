@@ -10,8 +10,8 @@ namespace Clinic.Domain.Entities
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public DateTime StartYear { get; set; }
-        public DateTime EndYear { get; set; }
+        public int StartYear { get; set; }
+        public int EndYear { get; set; }
         public string Degree { get; set; }
     }
 }
