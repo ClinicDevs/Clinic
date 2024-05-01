@@ -8,5 +8,9 @@ namespace Clinic.Domain.Entities
 {
     public class Result
     {
+        public Guid Id { get; set; }
+        public string Name { get; set; }
+        public string PhotoBefore { get; set; }
+        public string PhotoAfter { get; set;}
     }
 }
