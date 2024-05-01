@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Clinic.Domain\Clinic.Domain.csproj" />
     <Folder Include="UseCases\Diplom\Commands\" />
     <Folder Include="UseCases\Diplom\Handlers\CommandHandlers\" />
     <Folder Include="UseCases\Diplom\Handlers\QueryHandlers\" />
