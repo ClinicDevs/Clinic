@@ -13,6 +13,7 @@ namespace Clinic.Domain.Entities
         public string Address { get; set; }
         public int StartWork { get; set; }
         public string TUsername { get; set; }
+        public bool IsDeleted { get; set; }
         public string? PicturePath { get; set; }
         public Guid SpecialistId { get; set; }
         public Guid ServiceTypeId { get; set; }

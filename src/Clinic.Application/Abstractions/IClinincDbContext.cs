@@ -6,7 +6,6 @@ namespace Clinic.Application.Abstractions
 {
     public interface IClinincDbContext
     {
-        public DbSet<User> User { get; set; }
         public DbSet<Diplom> Diploms { get; set; }
         public DbSet<Doctor> Doctors { get; set; }
         public DbSet<Education> Educations { get; set; }
@@ -17,6 +16,6 @@ namespace Clinic.Application.Abstractions
         public DbSet<Skill> Skills { get; set; }
         public DbSet<Specialist> Specialists { get; set; }
 
-        public Task<int> SaveChangesAsync(CancellationToken cancellationToken);
+        public ValueTask<int> SaveChangesAsync(CancellationToken cancellationToken = default!);
     }
 }

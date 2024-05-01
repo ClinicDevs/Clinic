@@ -12,5 +12,6 @@ namespace Clinic.Domain.Entities
         public string Name { get; set; }
         public string Description { get; set; }
         public virtual List<Doctor> Doctors { get; set; }
+        public bool isDeleted {  get; set; }
     }
 }
