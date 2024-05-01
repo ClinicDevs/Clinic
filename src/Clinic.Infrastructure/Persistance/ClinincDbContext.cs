@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Clinic.Infrastructure.Persistance
 {
-    public class ClinincDbContext:DbContext,IClinincDbContext
+    public class ClinincDbContext : DbContext, IClinincDbContext
     {
-        public ClinincDbContext(DbContextOptions<ClinincDbContext> options):base(options)
+        public ClinincDbContext(DbContextOptions<ClinincDbContext> options) : base(options)
         {
         }
 
@@ -21,5 +21,10 @@ namespace Clinic.Infrastructure.Persistance
         public DbSet<Service> Services { get; set; }
         public DbSet<Skill> Skills { get; set; }
         public DbSet<Specialist> Specialists { get; set; }
+
+        async ValueTask<int> IClinincDbContext.SaveChangesAsync(CancellationToken cancellationToken)
+        {
+            return await base.SaveChangesAsync(cancellationToken);
+        }
     }
 }
