@@ -6,7 +6,6 @@ namespace Clinic.Application.Abstractions
 {
     public interface IClinincDbContext
     {
-        public DbSet<User> User { get; set; }
         public DbSet<Diplom> Diploms { get; set; }
         public DbSet<Doctor> Doctors { get; set; }
         public DbSet<Education> Educations { get; set; }
