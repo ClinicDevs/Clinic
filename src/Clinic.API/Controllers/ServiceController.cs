@@ -25,15 +25,19 @@ namespace Clinic.API.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<Service>> GetAllServices()
+        public async Task<IEnumerable<Service>> GetAllServices(int pageIndex,int size)
         {
-            return await _mediatr.Send(new GetAllServicesQuery());
+            return await _mediatr.Send(new GetAllServicesQuery
+            {
+                PageIndex= pageIndex,
+                Size=size
+            });
         }
 
         [HttpGet]
-        public async Task<Service> GetServiceById(GetByIdServiceQuery request)
+        public async Task<Service> GetServiceById(Guid id)
         {
-            return await _mediatr.Send(request);
+            return await _mediatr.Send(new GetByIdServiceQuery { Id = id }) ;
         }
 
         [HttpPut]
