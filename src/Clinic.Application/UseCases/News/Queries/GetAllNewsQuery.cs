@@ -8,7 +8,9 @@ using System.Threading.Tasks;
 
 namespace Clinic.Application.UseCases.News.Queries
 {
-    public class GetAllNewsQuery : IRequest<IEnumerable<New>>
+    public class GetAllNewsQuery:IRequest<IEnumerable<New>>
     {
+        public int PageIndex {  get; set; }
+        public int Size { get; set; }
     }
 }

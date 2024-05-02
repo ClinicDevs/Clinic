@@ -1,6 +1,7 @@
 ﻿using Clinic.Application.Abstractions;
 using Clinic.Application.UseCases.News.Commands;
 using Clinic.Domain.DTOs;
+using Clinic.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -11,52 +12,52 @@ using System.Threading.Tasks;
 
 namespace Clinic.Application.UseCases.News.Handlers.CommandHandlers
 {
-    public class UpdateNewsCommandHandler : IRequestHandler<UpdateNewsCommand, ResponseModel>
+    public class UpdateNewsCommandHandler:IRequestHandler<UpdateNewsCommand,ResponseModel>
     {
-        private readonly IClinincDbContext _ClinicDbContext;
+        private readonly IClinincDbContext _clinincDbContext;
 
-        public UpdateNewsCommandHandler(IClinincDbContext clinicDbContext)
+        public UpdateNewsCommandHandler(IClinincDbContext clinincDbContext)
         {
-            _ClinicDbContext = clinicDbContext;
+            this._clinincDbContext = clinincDbContext;
         }
 
         public async Task<ResponseModel> Handle(UpdateNewsCommand request, CancellationToken cancellationToken)
         {
-            try
+            New newModel = await _clinincDbContext.News.Where(n => n.IsDeleted == false).FirstOrDefaultAsync(n => n.Id == request.Id);
+            if (newModel == null)
             {
-                var news = await _ClinicDbContext.News.Where(x => x.IsDeleted == false)
-                    .FirstOrDefaultAsync(x => x.Id == request.Id);
-                if (news == null)
+                return new ResponseModel
                 {
-                    return new ResponseModel()
-                    {
-                        Message = "Not Found",
-                        StatusCode = 404,
-                        IsSuccess = false
-                    };
-                }
-
-                news.Title = request.Title;
-                news.Description = request.Description;
-                news.DoctorId = request.DoctorId;
-
-                _ClinicDbContext.News.Update(news);
-                await _ClinicDbContext.SaveChangesAsync(cancellationToken);
-
-                return new ResponseModel()
-                {
-                    Message = "Successfully Updated",
-                    IsSuccess = true,
-                    StatusCode = 200
+                    IsSuccess = false,
+                    StatusCode = 404,
+                    Message = "Not Found",
                 };
             }
-            catch (Exception ex) 
+            try
             {
-                return new ResponseModel()
+
+                newModel.Picture = request.Picture;
+                newModel.Title = request.Title;
+                newModel.Description = request.Description;
+                newModel.Date = request.Date;
+                newModel.DoctorId = request.DoctorId;
+
+                _clinincDbContext.News.Update(newModel);
+
+                return new ResponseModel
                 {
-                    Message = ex.Message,
+                    IsSuccess = true,
+                    StatusCode = 203,
+                    Message = "Succesfully Deleted",
+                };
+            }
+            catch (Exception ex)
+            {
+                return new ResponseModel
+                {
+                    IsSuccess = false,
                     StatusCode = 500,
-                    IsSuccess = false
+                    Message = ex.Message,
                 };
             }
         }

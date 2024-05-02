@@ -3,7 +3,7 @@ using Clinic.Application.UseCases.News.Commands;
 using Clinic.Domain.DTOs;
 using Clinic.Domain.Entities;
 using MediatR;
-using Microsoft.AspNetCore.Hosting;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,73 +13,47 @@ using System.Threading.Tasks;
 
 namespace Clinic.Application.UseCases.News.Handlers.CommandHandlers
 {
-    public class CreateNewsCommandHandler : IRequestHandler<CreateNewsCommand, ResponseModel>
+    public class CreateNewsCommandHandler:IRequestHandler<CreateNewsCommand,ResponseModel>
     {
         private readonly IClinincDbContext _clinincDbContext;
-        private readonly IWebHostEnvironment _webHostEnvironment;
-        public CreateNewsCommandHandler(IClinincDbContext clinincDbContext, IWebHostEnvironment webHostEnvironment)
+
+        public CreateNewsCommandHandler(IClinincDbContext clinincDbContext)
         {
             _clinincDbContext = clinincDbContext;
-            _webHostEnvironment = webHostEnvironment;
         }
 
         public async Task<ResponseModel> Handle(CreateNewsCommand request, CancellationToken cancellationToken)
         {
+            New newModel = new New
+            {
+                Picture = request.Picture,
+                Title = request.Title,
+                Description = request.Description,
+                Date = request.Date,
+                DoctorId = request.DoctorId,
+            };
+
             try
             {
-                string fileName = "";
-                string filePath = "";
-                if (request.Picture is not null)
-                {
-                    var file = request.Picture;
+                await _clinincDbContext.News.AddAsync(newModel);
+                await _clinincDbContext.SaveChangesAsync(cancellationToken);
 
-                    try
-                    {
-                        fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-                        filePath = Path.Combine(_webHostEnvironment.WebRootPath, "NewPics", fileName);
-                        using (var stream = new FileStream(filePath, FileMode.Create))
-                        {
-                            await file.CopyToAsync(stream);
-                        }
-                    }catch (Exception ex)
-                    {
-                        return new ResponseModel()
-                        {
-                            Message = ex.Message,
-                            IsSuccess = false,
-                            StatusCode = 500
-                        };
-                    }
-                }
-                var news = new New()
+                return new ResponseModel
                 {
-                    PicturePath = "/NewPics" + filePath,
-                    Title = request.Title,
-                    Description = request.Description,
-                    DoctorId = request.DoctorId
-                };
-
-                await _clinincDbContext.News.AddAsync(news);
-                await _clinincDbContext.SaveChangesAsync();
-
-                return new ResponseModel()
-                {
-                    Message = "Created",
+                    IsSuccess = true,
                     StatusCode = 201,
-                    IsSuccess = true
+                    Message = "Successfully Created!",
                 };
             }
             catch (Exception ex)
             {
-                return new ResponseModel()
+                return new ResponseModel
                 {
-                    Message = ex.Message,
                     IsSuccess = false,
-                    StatusCode = 500
+                    StatusCode = 500,
+                    Message = ex.Message,
                 };
-
             }
-           
         }
     }
 }

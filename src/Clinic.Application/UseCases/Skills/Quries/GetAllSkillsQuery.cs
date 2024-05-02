@@ -10,5 +10,7 @@ namespace Clinic.Application.UseCases.Skills.Quries
 {
     public class GetAllSkillsQuery: IRequest<IEnumerable<Skill>>
     {
+        public int PageIndex {  get; set; }
+        public int Size { get; set; }
     }
 }

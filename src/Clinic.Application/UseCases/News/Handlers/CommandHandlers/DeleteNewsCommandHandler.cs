@@ -1,6 +1,7 @@
 ﻿using Clinic.Application.Abstractions;
 using Clinic.Application.UseCases.News.Commands;
 using Clinic.Domain.DTOs;
+using Clinic.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -22,41 +23,35 @@ namespace Clinic.Application.UseCases.News.Handlers.CommandHandlers
 
         public async Task<ResponseModel> Handle(DeleteNewsCommand request, CancellationToken cancellationToken)
         {
+            New newModel = await _clinincDbContext.News.Where(n => n.IsDeleted == false).FirstOrDefaultAsync(n => n.Id == request.Id);
+            if (newModel == null)
+            {
+                return new ResponseModel
+                {
+                    IsSuccess = false,
+                    StatusCode = 404,
+                    Message = "Not Found",
+                };
+            }
             try
             {
-                var news = await _clinincDbContext.News
-                    .Where(x => x.IsDeleted == false)
-                    .FirstOrDefaultAsync(x => x.Id == request.Id);
+                newModel.IsDeleted = true;
+                _clinincDbContext.News.Update(newModel);
 
-                if (news == null)
+                return new ResponseModel
                 {
-                    return new ResponseModel()
-                    {
-                        Message = "Not Found",
-                        StatusCode = 500,
-                        IsSuccess = false
-                    };
-                }
-
-                news.IsDeleted = true;
-
-                _clinincDbContext.News.Update(news);
-                await _clinincDbContext.SaveChangesAsync(cancellationToken);
-
-                return new ResponseModel()
-                {
-                    Message = "Succesfully Deleted",
                     IsSuccess = true,
-                    StatusCode = 200
+                    StatusCode = 203,
+                    Message = "Succesfully Deleted",
                 };
-
-            }catch (Exception ex)
+            }
+            catch (Exception ex)
             {
-                return new ResponseModel()
+                return new ResponseModel
                 {
-                    Message = ex.Message,
+                    IsSuccess = false,
                     StatusCode = 500,
-                    IsSuccess = false
+                    Message = ex.Message,
                 };
             }
         }
