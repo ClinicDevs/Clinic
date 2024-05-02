@@ -1,4 +1,4 @@
-﻿using Clinic.Application.UseCases.Services.Commands;
+﻿   using Clinic.Application.UseCases.Services.Commands;
 using Clinic.Application.UseCases.Services.Queries;
 using Clinic.Domain.DTOs;
 using Clinic.Domain.Entities;
@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Clinic.API.Controllers
 {
-    [Route("api/[controller]/[action")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class ServiceController : ControllerBase
     {
