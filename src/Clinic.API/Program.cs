@@ -2,6 +2,7 @@
 using Clinic.Application;
 using Clinic.Infrastructure;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.RateLimiting;
 
 namespace Clinic.API
 {
@@ -14,6 +15,20 @@ namespace Clinic.API
 
             builder.Services.AddClinicInfrastructureDdependencyInjection(builder.Configuration);
             builder.Services.AddClinicApplicationDependencyInjection();
+
+            builder.Services.AddRateLimiter(x =>
+            {
+                x.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+
+                x.AddTokenBucketLimiter("bucket", options =>
+                {
+                    options.ReplenishmentPeriod = TimeSpan.FromSeconds(60);
+                    options.TokenLimit = 60;
+                    options.TokensPerPeriod = 20;
+                    options.AutoReplenishment = true;
+                });
+            });
+
 
             builder.Services.AddCors(options =>
             {
@@ -38,6 +53,8 @@ namespace Clinic.API
             }
 
             app.UseHttpsRedirection();
+
+            //app.UseRateLimiter();
 
             app.UseStaticFiles();
 

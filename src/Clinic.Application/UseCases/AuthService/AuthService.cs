@@ -13,11 +13,9 @@ namespace Clinic.Application.UseCases.AuthService
     public class AuthService : IAuthService
     {
         private IConfiguration _config;
-        private readonly RoleManager<IdentityRole> _roleManager;
-        public AuthService(IConfiguration config, RoleManager<IdentityRole> roleManager)
+        public AuthService(IConfiguration config)
         {
             _config = config;
-            _roleManager = roleManager;
         }
 
         public string GenerateToken(User user)
