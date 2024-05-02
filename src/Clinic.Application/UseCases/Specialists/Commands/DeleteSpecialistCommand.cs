@@ -6,11 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Clinic.Application.UseCases.ServiceTypes.Commands
+namespace Clinic.Application.UseCases.Specialists.Commands
 {
-    public class CreateServiceTypeCommand : IRequest<ResponseModel>
+    public class DeleteSpecialistCommand : IRequest<ResponseModel>
     {
-        public string Name { get; set; }
-
+        public Guid Id { get; set; }
     }
 }

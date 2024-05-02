@@ -6,11 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Clinic.Application.UseCases.ServiceTypes.Commands
+namespace Clinic.Application.UseCases.Specialists.Commands
 {
-    public class CreateServiceTypeCommand : IRequest<ResponseModel>
+    public class UpdateSpecialistCommand : IRequest<ResponseModel>
     {
+        public Guid Id { get; set; }
         public string Name { get; set; }
-
+        public string Description { get; set; }
     }
 }
