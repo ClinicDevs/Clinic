@@ -14,5 +14,5 @@ namespace Clinic.Application.UseCases.Diploms.Commands
         public string LitsenzyaId { get; set; }
         public IFormFile Picture { get; set; }
         public Guid DoctorId { get; set; }
-    }
+    }   
 }
