@@ -31,6 +31,7 @@ namespace Clinic.Application.UseCases.Skills.Hendlers.CommandHandlers
 
                     Name = request.Name,
                     IsDeleted = false
+                    
                 };
 
                 await _clinicDbContext.Skills.AddAsync(skill);
