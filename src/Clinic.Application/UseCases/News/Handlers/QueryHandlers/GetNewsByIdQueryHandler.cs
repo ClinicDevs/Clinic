@@ -19,7 +19,7 @@ namespace Clinic.Application.UseCases.News.Handlers.QueryHandlers
         {
             try
             {
-                return await _clinincDbContext.News.FirstOrDefaultAsync(n => n.Id == request.Id);
+                return await _clinincDbContext.News.Where(x => x.IsDeleted == false).FirstOrDefaultAsync(n => n.Id == request.Id) ?? throw new Exception("Not found");
             }
             catch (Exception ex)
             {

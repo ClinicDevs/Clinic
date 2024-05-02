@@ -6,7 +6,7 @@ using MediatR;
 
 namespace Clinic.Application.UseCases.Services.Handlers.CommandHandlers
 {
-    public class CreateServiceCommandHandler:IRequestHandler<CreateServiceCommand,ResponseModel>
+    public class CreateServiceCommandHandler : IRequestHandler<CreateServiceCommand, ResponseModel>
     {
         private readonly IClinincDbContext _clinincDbContext;
 
@@ -17,7 +17,7 @@ namespace Clinic.Application.UseCases.Services.Handlers.CommandHandlers
 
         public async Task<ResponseModel> Handle(CreateServiceCommand request, CancellationToken cancellationToken)
         {
-            Service service = new Service
+            Service service = new Service()
             {
                 Name = request.Name,
                 Description = request.Description,
@@ -32,7 +32,7 @@ namespace Clinic.Application.UseCases.Services.Handlers.CommandHandlers
             }
             catch (Exception ex)
             {
-                return new ResponseModel
+                return new ResponseModel()
                 {
                     IsSuccess = false,
                     StatusCode = 500,
@@ -40,7 +40,7 @@ namespace Clinic.Application.UseCases.Services.Handlers.CommandHandlers
                 };
             }
 
-            return new ResponseModel
+            return new ResponseModel()
             {
                 IsSuccess = true,
                 StatusCode = 201,

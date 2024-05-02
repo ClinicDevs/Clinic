@@ -23,10 +23,10 @@ namespace Clinic.Application.UseCases.News.Handlers.CommandHandlers
 
         public async Task<ResponseModel> Handle(DeleteNewsCommand request, CancellationToken cancellationToken)
         {
-            New newModel = await _clinincDbContext.News.Where(n => n.IsDeleted == false).FirstOrDefaultAsync(n => n.Id == request.Id);
+            var newModel = await _clinincDbContext.News.Where(n => n.IsDeleted == false).FirstOrDefaultAsync(n => n.Id == request.Id);
             if (newModel == null)
             {
-                return new ResponseModel
+                return new ResponseModel()
                 {
                     IsSuccess = false,
                     StatusCode = 404,
@@ -38,7 +38,7 @@ namespace Clinic.Application.UseCases.News.Handlers.CommandHandlers
                 newModel.IsDeleted = true;
                 _clinincDbContext.News.Update(newModel);
 
-                return new ResponseModel
+                return new ResponseModel()
                 {
                     IsSuccess = true,
                     StatusCode = 203,
@@ -47,7 +47,7 @@ namespace Clinic.Application.UseCases.News.Handlers.CommandHandlers
             }
             catch (Exception ex)
             {
-                return new ResponseModel
+                return new ResponseModel()
                 {
                     IsSuccess = false,
                     StatusCode = 500,

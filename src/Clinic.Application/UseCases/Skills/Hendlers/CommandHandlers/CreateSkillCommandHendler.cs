@@ -37,7 +37,7 @@ namespace Clinic.Application.UseCases.Skills.Hendlers.CommandHandlers
                 await _clinicDbContext.SaveChangesAsync(cancellationToken);
 
 
-                return new ResponseModel
+                return new ResponseModel()
                 {
                     Message = "Moshniy",
                     StatusCode = 200,
@@ -48,7 +48,7 @@ namespace Clinic.Application.UseCases.Skills.Hendlers.CommandHandlers
 
             catch (Exception ex)
             {
-                return new ResponseModel
+                return new ResponseModel()
                 {
                     Message = ex.Message,
                     StatusCode = 500,

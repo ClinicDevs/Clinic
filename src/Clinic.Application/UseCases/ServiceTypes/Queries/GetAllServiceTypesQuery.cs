@@ -10,5 +10,7 @@ namespace Clinic.Application.UseCases.ServiceTypes.Queries
 {
     public class GetAllServiceTypesQuery : IRequest<IEnumerable<ServiceType>>
     {
+        public int PageIndex { get; set; }
+        public int Size { get; set; }
     }
 }
