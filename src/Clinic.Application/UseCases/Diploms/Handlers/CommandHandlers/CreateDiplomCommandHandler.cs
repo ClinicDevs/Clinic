@@ -63,7 +63,7 @@ namespace Clinic.Application.UseCases.Diploms.Handlers.CommandHandlers
                 };
 
                 await _clinincDbContext.Diploms.AddAsync(diplom);
-                await _clinincDbContext.SaveChangesAsync();
+                await _clinincDbContext.SaveChangesAsync(cancellationToken);
 
                 return new ResponseModel()
                 {
