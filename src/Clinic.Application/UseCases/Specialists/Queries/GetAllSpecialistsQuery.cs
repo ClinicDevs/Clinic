@@ -10,5 +10,7 @@ namespace Clinic.Application.UseCases.Specialist.Queries
 {
     public class GetAllSpecialistsQuery : IRequest<IEnumerable<Domain.Entities.Specialist>>
     {
+        public int PageIndex {  get; set; }
+        public int Size { get; set; }
     }
 }
