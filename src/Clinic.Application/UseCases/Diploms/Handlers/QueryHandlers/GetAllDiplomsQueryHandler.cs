@@ -22,7 +22,11 @@ namespace Clinic.Application.UseCases.Diploms.Handlers.QueryHandlers
 
         public async Task<IEnumerable<Diplom>> Handle(GetAllDiplomsQuery request, CancellationToken cancellationToken)
         {
-            return await _clinincDbContext.Diploms.Skip(request.PageIndex-1).Take(request.Size).ToListAsync();
+            return await _clinincDbContext.Diploms
+                .Skip(request.PageIndex - 1)
+                    .Take(request.Size)
+                        .Where(x => x.IsDeleted == false)
+                            .ToListAsync();
         }
     }
 }
