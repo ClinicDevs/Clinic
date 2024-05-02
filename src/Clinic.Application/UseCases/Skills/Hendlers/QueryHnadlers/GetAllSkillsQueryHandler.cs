@@ -24,7 +24,9 @@ namespace Clinic.Application.UseCases.Skills.Hendlers.QueryHnadlers
         {
             return await _clinincDbContext.Skills
                 .Where(x => x.IsDeleted == false)
-                    .ToListAsync();
+                .Skip(request.PageIndex-1)
+                .Take(request.Size)
+                .ToListAsync();
         }
     }
 }
