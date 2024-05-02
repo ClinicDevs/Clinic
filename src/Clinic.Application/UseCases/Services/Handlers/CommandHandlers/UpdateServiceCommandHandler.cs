@@ -36,6 +36,7 @@ namespace Clinic.Application.UseCases.Services.Handlers.CommandHandlers
                 service.ServiceTypeId = request.ServiceTypeId;
 
                 _clinincDbContext.Services.Update(service);
+                await _clinincDbContext.SaveChangesAsync(cancellationToken);
 
                 return new ResponseModel
                 {
