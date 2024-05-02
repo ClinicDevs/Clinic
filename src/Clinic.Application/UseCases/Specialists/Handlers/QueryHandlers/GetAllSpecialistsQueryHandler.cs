@@ -25,6 +25,8 @@ namespace Clinic.Application.UseCases.Specialists.Handlers.QueryHandlers
         {
             return await _clinincDbContext.Specialists
                 .Where(x => x.isDeleted == false)
+                .Skip(request.PageIndex-1)
+                .Take(request.Size)
                     .ToListAsync();
         }
 
