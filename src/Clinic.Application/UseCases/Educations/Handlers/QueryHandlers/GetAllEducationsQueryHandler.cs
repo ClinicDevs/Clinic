@@ -22,7 +22,7 @@ namespace Clinic.Application.UseCases.Educations.Handlers.QueryHandlers
 
         public async Task<IEnumerable<Education>> Handle(GetAllEducationsQuery request, CancellationToken cancellationToken)
         {
-            return await _clinicDbContext.Educations.Where(x => x.IsDeleted == false).ToListAsync();
+            return await _clinicDbContext.Educations.Where(x => x.IsDeleted == false).Skip(request.PageIndex-1).Take(request.Size).ToListAsync();
         }
     }
 }
