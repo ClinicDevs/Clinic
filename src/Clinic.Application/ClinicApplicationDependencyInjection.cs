@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Clinic.Application.UseCases.AuthService;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace Clinic.Application
         public static IServiceCollection AddClinicApplicationDependencyInjection(this IServiceCollection services)
         {
             services.AddMediatR(Assembly.GetExecutingAssembly());
-
+            services.AddScoped<IAuthService, AuthService>();
             return services;
         }
     }

@@ -29,6 +29,7 @@ namespace Clinic.Application.UseCases.AuthService
                 new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString()),
                 new Claim(JwtRegisteredClaimNames.Iat,EpochTime.GetIntDate(DateTime.UtcNow).ToString(CultureInfo.InvariantCulture),ClaimValueTypes.Integer64),
                 new Claim("UserName",user.UserName!),
+                new Claim(ClaimTypes.Name,user.Firsname!),
                 new Claim(ClaimTypes.Role,user.Role!),
             };
 
