@@ -14,6 +14,6 @@ namespace Clinic.Domain.Entities
         public int EndYear { get; set; }
         public string Degree { get; set; }
         public bool IsDeleted { get; set; }
-        public virtual List<Doctor> EducationDoctors { get; set; }
+        public virtual List<Doctor> Doctors { get; set; }
     }
 }

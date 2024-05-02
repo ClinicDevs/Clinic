@@ -28,7 +28,6 @@ namespace Clinic.Application.UseCases.Specialists.Handlers.QueryHandlers
                     .ToListAsync();
         }
 
-       
-    }
+
     }
 }

@@ -19,10 +19,10 @@ namespace Clinic.Domain.Entities
         public Guid ServiceTypeId { get; set; }
         public virtual Specialist Specialist { get; set; }
         public virtual ServiceType ServiceType { get; set; }
-        public virtual List<Result> DoctorResults { get; set; }
-        public virtual List<Education> EducationDoctors { get; set; }
-        public virtual List<Diplom> DoctorDiploms { get; set; }
-        public virtual List<Skill> DoctorSkills { get; set; }
-        public virtual List<Feedback> DoctorFeedbacks { get; set; }
+        public virtual List<Result> Results { get; set; }
+        public virtual List<Education> Educations { get; set; }
+        public virtual List<Diplom> Diploms { get; set; }
+        public virtual List<Skill> Skills { get; set; }
+        public virtual List<Feedback> Feedbacks { get; set; }
     }
 }
