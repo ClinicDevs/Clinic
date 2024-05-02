@@ -28,6 +28,7 @@ namespace Clinic.Application.UseCases.Services.Handlers.CommandHandlers
             try
             {
                 await _clinincDbContext.Services.AddAsync(service);
+                await _clinincDbContext.SaveChangesAsync(cancellationToken);
             }
             catch (Exception ex)
             {

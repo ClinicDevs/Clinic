@@ -18,6 +18,7 @@ namespace Clinic.Application.UseCases.Services.Handlers.CommandHandlers
         public async Task<ResponseModel> Handle(DeleteServiceCommand request, CancellationToken cancellationToken)
         {
             Service services = _clinincDbContext.Services.Where(s=>s.IsDeleted==false).FirstOrDefault(s=>s.Id==request.Id);
+
             if (services == null)
             {
                 return new ResponseModel
@@ -31,6 +32,7 @@ namespace Clinic.Application.UseCases.Services.Handlers.CommandHandlers
             {
                 services.IsDeleted=true;
                 _clinincDbContext.Services.Update(services);
+                await _clinincDbContext.SaveChangesAsync(cancellationToken);
 
                 return new ResponseModel
                 {
