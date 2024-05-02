@@ -10,7 +10,7 @@ namespace Clinic.Domain.Entities
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public List<Doctor> DoctorSkills { get; set; }
+        public virtual List<Doctor> Doctors { get; set; }
         public bool IsDeleted { get; set; }
     }
 }

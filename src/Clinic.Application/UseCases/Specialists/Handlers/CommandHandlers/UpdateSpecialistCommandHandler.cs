@@ -63,5 +63,10 @@ namespace Clinic.Application.UseCases.Specialists.Handlers.CommandHandlers
 
 
         }
+
+        public Task<ResponseModel> Handle(UpdateSkillCommand request, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
