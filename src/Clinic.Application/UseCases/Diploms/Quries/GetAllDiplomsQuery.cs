@@ -10,7 +10,7 @@ namespace Clinic.Application.UseCases.Diploms.Quries
 {
     public class GetAllDiplomsQuery : IRequest<IEnumerable<Diplom>>
     {
-        public int PageIndex { get; set; }
+        public int PageIndex {  get; set; }
         public int Size { get; set; }
     }
 }

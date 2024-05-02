@@ -23,7 +23,7 @@ namespace Clinic.Application.UseCases.Services.Handlers.QueryHandlers
         {
             try
             {
-                return _clinincDbContext.Services.ToList();
+                return _clinincDbContext.Services.Where(s=>s.IsDeleted==false).Skip(request.PageIndex-1).Take(request.Size).ToList();
             }
             catch (Exception ex)
             {
