@@ -19,6 +19,7 @@ namespace Clinic.Infrastructure.Persistance
         public DbSet<New> News { get; set; }
         public DbSet<Result> Results { get; set; }
         public DbSet<Service> Services { get; set; }
+        public DbSet<ServiceType> ServiceTypes { get; set; }
         public DbSet<Skill> Skills { get; set; }
         public DbSet<Specialist> Specialists { get; set; }
 
