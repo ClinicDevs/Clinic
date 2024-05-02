@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Clinic.Application.UseCases.Results.Handlers.CommandHandlers
 {
-    public class UpdateResultCommandHandler : IRequestHandler<UpdateDiplomCommand, ResponseModel>
+    public class UpdateResultCommandHandler : IRequestHandler<UpdateResultCommand, ResponseModel>
     {
         private readonly IClinincDbContext _clinincDbContext;
 
