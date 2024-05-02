@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Clinic.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class FeedBackController : ControllerBase
     {
@@ -47,13 +47,13 @@ namespace Clinic.API.Controllers
         }
 
         [HttpPut]
-        public async Task<ResponseModel> UpdateEducation(UpdateFeedbackCommand request)
+        public async Task<ResponseModel> UpdateFeedback(UpdateFeedbackCommand request)
         {
             return await _mediatoR.Send(request);
         }
 
         [HttpDelete]
-        public async Task<ResponseModel> DeleteEducation(DeleteFeedbackCommand request)
+        public async Task<ResponseModel> DeleteFeedback(DeleteFeedbackCommand request)
         {
             return await _mediatoR.Send(request);
         }
