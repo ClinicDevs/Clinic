@@ -17,11 +17,11 @@ namespace Clinic.Application.UseCases.Services.Handlers.CommandHandlers
 
         public async Task<ResponseModel> Handle(DeleteServiceCommand request, CancellationToken cancellationToken)
         {
-            Service services = _clinincDbContext.Services.Where(s=>s.IsDeleted==false).FirstOrDefault(s=>s.Id==request.Id);
+            var services = _clinincDbContext.Services.Where(s => s.IsDeleted == false).FirstOrDefault(s => s.Id == request.Id);
 
             if (services == null)
             {
-                return new ResponseModel
+                return new ResponseModel()
                 {
                     IsSuccess = false,
                     StatusCode = 404,
@@ -30,11 +30,11 @@ namespace Clinic.Application.UseCases.Services.Handlers.CommandHandlers
             }
             try
             {
-                services.IsDeleted=true;
+                services.IsDeleted = true;
                 _clinincDbContext.Services.Update(services);
                 await _clinincDbContext.SaveChangesAsync(cancellationToken);
 
-                return new ResponseModel
+                return new ResponseModel()
                 {
                     IsSuccess = true,
                     StatusCode = 200,
@@ -43,7 +43,7 @@ namespace Clinic.Application.UseCases.Services.Handlers.CommandHandlers
             }
             catch (Exception ex)
             {
-                return new ResponseModel
+                return new ResponseModel()
                 {
                     IsSuccess = false,
                     StatusCode = 400,

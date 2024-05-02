@@ -17,7 +17,7 @@ namespace Clinic.Application.UseCases.Services.Handlers.CommandHandlers
 
         public async Task<ResponseModel> Handle(UpdateServiceCommand request, CancellationToken cancellationToken)
         {
-            Service service = _clinincDbContext.Services.Where(s => s.IsDeleted == false).FirstOrDefault(s => s.Id == request.Id);
+            var service = _clinincDbContext.Services.Where(s => s.IsDeleted == false).FirstOrDefault(s => s.Id == request.Id);
             if (service == null)
             {
                 return new ResponseModel

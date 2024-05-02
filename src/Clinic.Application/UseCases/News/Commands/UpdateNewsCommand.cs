@@ -12,7 +12,6 @@ namespace Clinic.Application.UseCases.News.Commands
     public class UpdateNewsCommand : IRequest<ResponseModel>
     {
         public Guid Id { get; set; }
-        public string Picture { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTimeOffset Date { get; set; }

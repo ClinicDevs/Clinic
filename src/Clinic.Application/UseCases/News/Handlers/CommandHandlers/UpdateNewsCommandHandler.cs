@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Clinic.Application.UseCases.News.Handlers.CommandHandlers
 {
-    public class UpdateNewsCommandHandler:IRequestHandler<UpdateNewsCommand,ResponseModel>
+    public class UpdateNewsCommandHandler : IRequestHandler<UpdateNewsCommand, ResponseModel>
     {
         private readonly IClinincDbContext _clinincDbContext;
 
@@ -26,7 +26,7 @@ namespace Clinic.Application.UseCases.News.Handlers.CommandHandlers
             New newModel = await _clinincDbContext.News.Where(n => n.IsDeleted == false).FirstOrDefaultAsync(n => n.Id == request.Id);
             if (newModel == null)
             {
-                return new ResponseModel
+                return new ResponseModel()
                 {
                     IsSuccess = false,
                     StatusCode = 404,
@@ -36,7 +36,6 @@ namespace Clinic.Application.UseCases.News.Handlers.CommandHandlers
             try
             {
 
-                newModel.Picture = request.Picture;
                 newModel.Title = request.Title;
                 newModel.Description = request.Description;
                 newModel.Date = request.Date;
@@ -44,7 +43,7 @@ namespace Clinic.Application.UseCases.News.Handlers.CommandHandlers
 
                 _clinincDbContext.News.Update(newModel);
 
-                return new ResponseModel
+                return new ResponseModel()
                 {
                     IsSuccess = true,
                     StatusCode = 203,
@@ -53,7 +52,7 @@ namespace Clinic.Application.UseCases.News.Handlers.CommandHandlers
             }
             catch (Exception ex)
             {
-                return new ResponseModel
+                return new ResponseModel()
                 {
                     IsSuccess = false,
                     StatusCode = 500,
