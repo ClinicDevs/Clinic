@@ -30,8 +30,7 @@ namespace Clinic.Application.UseCases.Skills.Hendlers.CommandHandlers
                 {
 
                     Name = request.Name,
-                    DoctorSkills = request.DoctorSkills
-
+                    IsDeleted = false
                 };
 
                 await _clinicDbContext.Skills.AddAsync(skill);
@@ -45,8 +44,8 @@ namespace Clinic.Application.UseCases.Skills.Hendlers.CommandHandlers
                     IsSuccess = true,
                 };
 
-            } 
-            
+            }
+
             catch (Exception ex)
             {
                 return new ResponseModel

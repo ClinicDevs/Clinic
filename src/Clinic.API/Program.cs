@@ -1,4 +1,7 @@
 
+using Clinic.Application;
+using Clinic.Infrastructure;
+
 namespace Clinic.API
 {
     public class Program
@@ -8,6 +11,9 @@ namespace Clinic.API
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+
+            builder.Services.AddClinicInfrastructureDdependencyInjection(builder.Configuration);
+            builder.Services.AddClinicApplicationDependencyInjection();
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -25,8 +31,11 @@ namespace Clinic.API
 
             app.UseHttpsRedirection();
 
-            app.UseAuthorization();
+            app.UseStaticFiles();
 
+            app.UseAuthentication();
+
+            app.UseAuthorization();
 
             app.MapControllers();
 

@@ -10,6 +10,6 @@ namespace Clinic.Application.UseCases.Skills.Commands
 {
     public class DeleteSkillCommand : IRequest<ResponseModel>
     {
-        Guid Id {  get; set; }
+        public Guid Id {  get; set; }
     }
 }

@@ -42,7 +42,8 @@ namespace Clinic.Application.UseCases.Skills.Hendlers.CommandHandlers
 
                 skill.IsDeleted = true;
 
-                _clinincDbContext.Diploms.Update(skill);
+                _clinincDbContext.Skills.Update(skill);
+                
                 await _clinincDbContext.SaveChangesAsync(cancellationToken);
 
                 return new ResponseModel()

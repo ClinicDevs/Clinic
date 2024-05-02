@@ -12,7 +12,5 @@ namespace Clinic.Application.UseCases.Skills.Commands
     public class CreateSkillCommand: IRequest<ResponseModel>
     {
         public string Name { get; set; }
-        public List<Doctor> DoctorSkills { get; set; }
-        public bool IsDeleted { get; set; }
     }
 }

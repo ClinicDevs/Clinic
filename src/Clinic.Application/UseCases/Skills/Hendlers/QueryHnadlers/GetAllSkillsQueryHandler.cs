@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Clinic.Application.UseCases.Skills.Hendlers.QueryHnadlers
 {
-    public class GetAllSkillsQueryHandler : IRequestHandler <GetAllSkillsQuery, IEnumerable<Skill>>
+    public class GetAllSkillsQueryHandler : IRequestHandler<GetAllSkillsQuery, IEnumerable<Skill>>
     {
         private readonly IClinincDbContext _clinincDbContext;
 
@@ -20,9 +20,11 @@ namespace Clinic.Application.UseCases.Skills.Hendlers.QueryHnadlers
             _clinincDbContext = clinincDbContext;
         }
 
-        public async Task<IEnumerable<Skill>> Handle (GetAllSkillsQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<Skill>> Handle(GetAllSkillsQuery request, CancellationToken cancellationToken)
         {
-           return await _clinincDbContext.Skills.ToListAsync();
+            return await _clinincDbContext.Skills
+                .Where(x => x.IsDeleted == false)
+                    .ToListAsync();
         }
     }
 }
