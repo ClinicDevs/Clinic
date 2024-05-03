@@ -1,12 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Clinic.Application.Abstractions;
+using Clinic.Application.UseCases.Doctors.Queries;
+using Clinic.Domain.Entities;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Clinic.Application.UseCases.Doctors.Handlers.QueryHandlers
 {
-    public class GetDoctorByIdQueryHandler
+    public class GetDoctorByIdQueryHandler : IRequestHandler<GetDoctorByIdQuery, Doctor>
     {
+        private readonly IClinincDbContext _clinincDbContext;
+
+        public GetDoctorByIdQueryHandler(IClinincDbContext clinincDbContext)
+        {
+            _clinincDbContext = clinincDbContext;
+        }
+
+        public async Task<Doctor> Handle(GetDoctorByIdQuery request, CancellationToken cancellationToken)
+        {
+            try
+            {
+                return await _clinincDbContext.Doctors.Where(d => d.IsDeleted == false).FirstOrDefaultAsync(d => d.Id == request.Id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Something went wrong",ex);
+            }
+        }
     }
 }
