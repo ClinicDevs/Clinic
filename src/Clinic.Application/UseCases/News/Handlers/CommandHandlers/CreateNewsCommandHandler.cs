@@ -57,7 +57,7 @@ namespace Clinic.Application.UseCases.News.Handlers.CommandHandlers
             }
             New newModel = new New()
             {
-                PicturePath = "/NewPh" + filePath,
+                PicturePath = filePath,
                 Title = request.Title,
                 Description = request.Description,
                 Date = request.Date,

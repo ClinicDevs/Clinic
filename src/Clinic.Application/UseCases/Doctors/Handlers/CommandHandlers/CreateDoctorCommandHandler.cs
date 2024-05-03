@@ -60,9 +60,12 @@ namespace Clinic.Application.UseCases.Doctors.Handlers.CommandHandlers
                     TUsername = request.TUsername,
                     ServiceTypeId = request.ServiceTypeId,
                     SpecialistId = request.SpecialistId,
-                    PicturePath = "/DoctorPh" + filePath
+                    PicturePath = filePath,
+                    IsDeleted = false
                 };
 
+                await _clinincDbContext.Doctors.AddAsync(doctor);
+                await _clinincDbContext.SaveChangesAsync(cancellationToken);
 
                 return new ResponseModel
                 {

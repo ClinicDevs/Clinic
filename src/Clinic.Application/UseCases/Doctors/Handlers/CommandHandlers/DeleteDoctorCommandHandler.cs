@@ -21,7 +21,7 @@ namespace Clinic.Application.UseCases.Doctors.Handlers.CommandHandlers
             var doctor = await _clinincDbContext.Doctors.Where(d => d.IsDeleted == false).FirstOrDefaultAsync(d => d.Id == request.Id);
             if (doctor == null)
             {
-                return new ResponseModel
+                return new ResponseModel()
                 {
                     IsSuccess = false,
                     StatusCode = 404,
@@ -32,7 +32,8 @@ namespace Clinic.Application.UseCases.Doctors.Handlers.CommandHandlers
             {
                 doctor.IsDeleted = true;
                 _clinincDbContext.Doctors.Update(doctor);
-                return new ResponseModel
+                await _clinincDbContext.SaveChangesAsync(cancellationToken);
+                return new ResponseModel()
                 {
                     IsSuccess = true,
                     StatusCode = 203,
@@ -41,7 +42,7 @@ namespace Clinic.Application.UseCases.Doctors.Handlers.CommandHandlers
             }
             catch (Exception ex)
             {
-                return new ResponseModel
+                return new ResponseModel()
                 {
                     IsSuccess = false,
                     StatusCode = 500,

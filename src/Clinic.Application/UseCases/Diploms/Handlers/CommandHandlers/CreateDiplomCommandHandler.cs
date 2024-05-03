@@ -33,7 +33,6 @@ namespace Clinic.Application.UseCases.Diploms.Handlers.CommandHandlers
                 {
                     var file = request.Picture;
 
-
                     try
                     {
                         fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
@@ -57,7 +56,7 @@ namespace Clinic.Application.UseCases.Diploms.Handlers.CommandHandlers
 
                 var diplom = new Diplom()
                 {
-                    PicturePath = "/DiplomPics" + filePath,
+                    PicturePath = filePath,
                     LitsenzyaId = request.LitsenzyaId,
                     DoctorId = request.DoctorId
                 };

@@ -27,7 +27,7 @@ namespace Clinic.API.Controllers
         [HttpGet]
         public async Task<IEnumerable<Doctor>> GetAllDoctor(int pageIndex, int size)
         {
-            return await _mediatr.Send(new GetAllDoctorsQuery
+            return await _mediatr.Send(new GetAllDoctorsQuery()
             {
                 PageIndex = pageIndex,
                 Size = size
@@ -37,7 +37,7 @@ namespace Clinic.API.Controllers
         [HttpGet]
         public async Task<Doctor> GetDoctorById(Guid Id)
         {
-            return await _mediatr.Send(new GetDoctorByIdQuery
+            return await _mediatr.Send(new GetDoctorByIdQuery()
             {
                 Id = Id
             });

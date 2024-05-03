@@ -17,7 +17,7 @@ namespace Clinic.Application.UseCases.Doctors.Handlers.CommandHandlers
         }
         public async Task<ResponseModel> Handle(UpdateDoctorCommand request, CancellationToken cancellationToken)
         {
-            Doctor doctor = await _clinincDbContext.Doctors.Where(d => d.IsDeleted == false).FirstOrDefaultAsync(d => d.Id == request.Id);
+            var doctor = await _clinincDbContext.Doctors.Where(d => d.IsDeleted == false).FirstOrDefaultAsync(d => d.Id == request.Id);
             if (doctor == null)
             {
                 return new ResponseModel
@@ -39,6 +39,7 @@ namespace Clinic.Application.UseCases.Doctors.Handlers.CommandHandlers
                 doctor.ServiceTypeId = request.ServiceTypeId;
 
                 _clinincDbContext.Doctors.Update(doctor);
+                await _clinincDbContext.SaveChangesAsync(cancellationToken);
                 return new ResponseModel
                 {
                     IsSuccess = true,

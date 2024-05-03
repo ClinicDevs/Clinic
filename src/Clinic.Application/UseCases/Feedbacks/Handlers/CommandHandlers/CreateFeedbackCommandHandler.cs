@@ -58,7 +58,7 @@ namespace Clinic.Application.UseCases.Feedbacks.Handlers.CommandHandlers
 
                 var feedback = new Feedback()
                 {
-                    VideoPath = "/FeedbackVidos" + filePath,
+                    VideoPath = filePath,
                     ServiceId = request.ServiceId,
                     DoctorId = request.DoctorId,
                     Description = request.Description

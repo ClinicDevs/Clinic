@@ -15,12 +15,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\" />
+    <ProjectReference Include="..\Clinic.Application\Clinic.Application.csproj" />
+    <ProjectReference Include="..\Clinic.Infrastructure\Clinic.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Clinic.Application\Clinic.Application.csproj" />
-    <ProjectReference Include="..\Clinic.Infrastructure\Clinic.Infrastructure.csproj" />
+    <Folder Include="wwwroot\DoctorPh\" />
+    <Folder Include="wwwroot\FeedbackVidos\" />
+    <Folder Include="wwwroot\BeforPic\" />
+    <Folder Include="wwwroot\AfterPic\" />
+    <Folder Include="wwwroot\DiplomPics\" />
+    <Folder Include="wwwroot\NewPh\" />
   </ItemGroup>
 
 </Project>

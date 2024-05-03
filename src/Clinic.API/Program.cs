@@ -5,6 +5,7 @@ using Clinic.Infrastructure;
 using Clinic.Infrastructure.Persistance;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.RateLimiting;
+using System.Text.Json.Serialization;
 
 namespace Clinic.API
 {
@@ -47,6 +48,11 @@ namespace Clinic.API
             });
 
             builder.Services.AddControllers();
+            builder.Services.AddControllersWithViews()
+   .AddJsonOptions(options =>
+   {
+       options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+   });
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 

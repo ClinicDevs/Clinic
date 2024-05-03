@@ -67,8 +67,8 @@ namespace Clinic.Application.UseCases.Results.Handlers.CommandHandlers
                 var result = new Result()
                 {
                     Name = request.Name,
-                    PhotoBefore = "/BeforPic" + filePath,
-                    PhotoAfter = "/AfterPic" + filePath2,
+                    PhotoBefore = filePath,
+                    PhotoAfter = filePath2,
                     DoctorId = request.DoctorId
                     
                    
