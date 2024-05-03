@@ -1,12 +1,53 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Clinic.Application.Abstractions;
+using Clinic.Application.UseCases.Doctors.Commands;
+using Clinic.Domain.DTOs;
+using Clinic.Domain.Entities;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Clinic.Application.UseCases.Doctors.Handlers.CommandHandlers
 {
-    public class DeleteDoctorCommandHandler
+    public class DeleteDoctorCommandHandler : IRequestHandler<DeleteDoctorCommand, ResponseModel>
     {
+        private readonly IClinincDbContext _clinincDbContext;
+
+        public DeleteDoctorCommandHandler(IClinincDbContext clinincDbContext)
+        {
+            _clinincDbContext = clinincDbContext;
+        }
+
+        public async Task<ResponseModel> Handle(DeleteDoctorCommand request, CancellationToken cancellationToken)
+        {
+            Doctor doctor = await _clinincDbContext.Doctors.Where(d => d.IsDeleted == false).FirstOrDefaultAsync(d => d.Id == request.Id);
+            if (doctor == null)
+            {
+                return new ResponseModel
+                {
+                    IsSuccess = false,
+                    StatusCode = 404,
+                    Message = "Not Found"
+                };
+            }
+            try
+            {
+                doctor.IsDeleted = true;
+                _clinincDbContext.Doctors.Update(doctor);
+                return new ResponseModel
+                {
+                    IsSuccess = true,
+                    StatusCode = 203,
+                    Message = "Successfuly Deleted!"
+                };
+            }
+            catch (Exception ex)
+            {
+                return new ResponseModel
+                {
+                    IsSuccess = false,
+                    StatusCode = 500,
+                    Message = "Somthing Went Wrong"
+                };
+            }
+        }
     }
 }
