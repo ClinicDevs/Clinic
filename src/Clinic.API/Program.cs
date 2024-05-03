@@ -1,6 +1,8 @@
 
 using Clinic.Application;
+using Clinic.Domain.Entities.Auth;
 using Clinic.Infrastructure;
+using Clinic.Infrastructure.Persistance;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.RateLimiting;
 
@@ -28,6 +30,10 @@ namespace Clinic.API
                     options.AutoReplenishment = true;
                 });
             });
+
+            builder.Services.AddIdentity<User, IdentityRole>()
+               .AddEntityFrameworkStores<ClinincDbContext>()
+               .AddDefaultTokenProviders();
 
 
             builder.Services.AddCors(options =>
@@ -67,7 +73,7 @@ namespace Clinic.API
             using (var scope = app.Services.CreateScope())
             {
                 var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-                var roles = new[] { "TeamLead", "Backend", "Frondend", "Fullstack" };
+                var roles = new[] { "Admin", "User", "Doctor" };
 
                 foreach (var role in roles)
                 {
@@ -78,7 +84,31 @@ namespace Clinic.API
                 }
             }
 
+            using (var scope = app.Services.CreateScope())
+            {
+                var userManager =
+                    scope.ServiceProvider.GetRequiredService<UserManager<User>>();
 
+                string email = "admin@gmail.com";
+                string password = "Adminaka1!";
+
+                if (await userManager.FindByEmailAsync(email) == null)
+                {
+                    var user = new User()
+                    {
+                        Firsname = email,
+                        Lastname = email,
+                        UserName = email,
+                        Email = email,
+                        Role = "Admin",
+                        EmailConfirmed = true
+                    };
+
+                    await userManager.CreateAsync(user, password);
+
+                    await userManager.AddToRoleAsync(user, "TeamLead");
+                }
+            }
             app.Run();
         }
     }
