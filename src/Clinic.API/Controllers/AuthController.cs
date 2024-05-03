@@ -34,6 +34,8 @@ namespace Clinic.API.Controllers
                 Email = register.Email,
                 Firsname = register.Firstname,
                 Lastname = register.Lastname,
+                UserName = register.Username,
+                Role = "User"
             };
 
             var result = await _userManager.CreateAsync(user, register.Password);
@@ -82,7 +84,7 @@ namespace Clinic.API.Controllers
                 });
             }
 
-            var token = _authService.GenerateToken(user);
+            var token = await _authService.GenerateToken(user);
 
             return Ok(new TokenDTO()
             {

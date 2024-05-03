@@ -61,6 +61,7 @@ namespace Clinic.API
             app.UseHttpsRedirection();
 
             //app.UseRateLimiter();
+            app.UseCors();
 
             app.UseStaticFiles();
 
@@ -89,8 +90,8 @@ namespace Clinic.API
                 var userManager =
                     scope.ServiceProvider.GetRequiredService<UserManager<User>>();
 
-                string email = "admin@gmail.com";
-                string password = "Adminaka1!";
+                string email = "admin@admin.com";
+                string password = "Admin001!";
 
                 if (await userManager.FindByEmailAsync(email) == null)
                 {

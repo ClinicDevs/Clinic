@@ -9,6 +9,6 @@ namespace Clinic.Application.UseCases.AuthService
 {
     public interface IAuthService
     {
-        public string GenerateToken(User user);
+        public Task<string> GenerateToken(User user);
     }
 }
