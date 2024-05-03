@@ -41,6 +41,8 @@ namespace Clinic.API.Controllers
             if (!result.Succeeded)
                 throw new Exception();
 
+            await _userManager.AddToRoleAsync(user, "User");
+
             return Ok(new ResponseModel()
             {
                 IsSuccess = true,

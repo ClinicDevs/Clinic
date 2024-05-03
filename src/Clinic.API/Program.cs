@@ -106,7 +106,7 @@ namespace Clinic.API
 
                     await userManager.CreateAsync(user, password);
 
-                    await userManager.AddToRoleAsync(user, "TeamLead");
+                    await userManager.AddToRoleAsync(user, "Admin");
                 }
             }
             app.Run();
