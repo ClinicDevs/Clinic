@@ -15,10 +15,7 @@ namespace Clinic.Application
         public static IServiceCollection AddClinicApplicationDependencyInjection(this IServiceCollection services)
         {
             services.AddMediatR(Assembly.GetExecutingAssembly());
-
             services.AddScoped<IAuthService, AuthService>();
-            services.AddDistributedMemoryCache();
-
             return services;
         }
     }

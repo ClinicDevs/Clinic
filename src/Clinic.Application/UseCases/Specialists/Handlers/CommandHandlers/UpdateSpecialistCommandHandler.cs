@@ -60,6 +60,8 @@ namespace Clinic.Application.UseCases.Specialists.Handlers.CommandHandlers
                     IsSuccess = false
                 };
             }
+
+
         }
     }
 }
