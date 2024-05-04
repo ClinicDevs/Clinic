@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Clinic.Application.UseCases.Specialists.Handlers.CommandHandlers
 {
-    public class UpdateSpecialistCommandHandler : IRequestHandler<UpdateSkillCommand, ResponseModel>
+    public class UpdateSpecialistCommandHandler : IRequestHandler<UpdateSpecialistCommand, ResponseModel>
     {
         private readonly IClinincDbContext _clinincDbContext;
 
@@ -62,11 +62,6 @@ namespace Clinic.Application.UseCases.Specialists.Handlers.CommandHandlers
             }
 
 
-        }
-
-        public Task<ResponseModel> Handle(UpdateSkillCommand request, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
         }
     }
 }

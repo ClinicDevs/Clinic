@@ -4,6 +4,7 @@ using Clinic.Domain.DTOs;
 using Clinic.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Cryptography.Xml;
 
 namespace Clinic.API.Controllers
 {
@@ -27,7 +28,7 @@ namespace Clinic.API.Controllers
         [HttpGet]
         public async Task<IEnumerable<Skill>> GetAllSkills(int pageIndex, int size)
         {
-            return await _mediatr.Send(new GetAllSkillsQuery
+            return await _mediatr.Send(new GetAllSkillsQuery()
             {
                 PageIndex = pageIndex,
                 Size = size
@@ -37,22 +38,25 @@ namespace Clinic.API.Controllers
         [HttpGet]
         public async Task<Skill> GetSkillById(Guid Id)
         {
-            return await _mediatr.Send(new GetSkillByIdQuery
-            { 
-                Id = Id 
+            return await _mediatr.Send(new GetSkillByIdQuery()
+            {
+                Id = Id
             });
         }
 
         [HttpPut]
-        public async Task<ResponseModel> UpdateSkill(UpdateSkillCommand request)
+        public async Task<ResponseModel> UpdateSkill(UpdateSkillCommand command)
         {
-            return await _mediatr.Send(request);
+            return await _mediatr.Send(command);
         }
 
         [HttpDelete]
-        public async Task<ResponseModel> DeleteSkill(DeleteSkillCommand request)
+        public async Task<ResponseModel> DeleteSkill(Guid id)
         {
-            return await _mediatr.Send(request);
+            return await _mediatr.Send(new DeleteSkillCommand()
+            {
+                Id = id
+            });
         }
     }
 }
