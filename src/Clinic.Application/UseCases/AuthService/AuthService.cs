@@ -10,15 +10,10 @@ using System.Text.Json;                     // JsonSerializer ishlashi uchun
 
 namespace Clinic.Application.UseCases.AuthService
 {
-    public class AuthService : IAuthService
+    public class AuthService(IConfiguration config, UserManager<User> userManager) : IAuthService
     {
-        private readonly UserManager<User> _userManager;
-        private IConfiguration _config;
-        public AuthService(IConfiguration config, UserManager<User> userManager)
-        {
-            _config = config;
-            _userManager = userManager;
-        }
+        private readonly UserManager<User> _userManager = userManager;
+        private readonly IConfiguration _config = config;
 
         public async Task<string> GenerateToken(User user)
         {
@@ -29,11 +24,11 @@ namespace Clinic.Application.UseCases.AuthService
 
             List<Claim> claims = new List<Claim>()
             {
-                new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString()),
-                new Claim(JwtRegisteredClaimNames.Iat,EpochTime.GetIntDate(DateTime.UtcNow).ToString(CultureInfo.InvariantCulture),ClaimValueTypes.Integer64),
-                new Claim("UserName",user.UserName!),
-                new Claim(ClaimTypes.Name,user.Firsname!),
-                new Claim("role",role[0]),
+                new(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString()),
+                new(JwtRegisteredClaimNames.Iat,EpochTime.GetIntDate(DateTime.UtcNow).ToString(CultureInfo.InvariantCulture),ClaimValueTypes.Integer64),
+                new("UserName",user.UserName!),
+                new(ClaimTypes.Name,user.Firsname!),
+                new("role",role[0]),
             };
 
             JwtSecurityToken token = new JwtSecurityToken(
