@@ -19,7 +19,7 @@ namespace Clinic.Application.UseCases.Doctors.Handlers.QueryHandlers
         {
             try
             {
-                return await _clinincDbContext.Doctors.Where(d => d.IsDeleted == false).FirstOrDefaultAsync(d => d.Id == request.Id) ?? throw new Exception();
+                return await _clinincDbContext.Doctors.Where(d => d.IsDeleted == false).FirstOrDefaultAsync(d => d.Id == request.Id, cancellationToken: cancellationToken) ?? throw new Exception();
             }
             catch (Exception ex)
             {
