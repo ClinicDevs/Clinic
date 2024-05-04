@@ -37,7 +37,7 @@ namespace Clinic.Application.UseCases.Doctors.Handlers.CommandHandlers
                         filePath = Path.Combine(_webHostEnvironment.WebRootPath, "DoctorPh", fileName);
                         using (var stream = new FileStream(filePath, FileMode.Create))
                         {
-                            await file.CopyToAsync(stream, cancellationToken);
+                            await file.CopyToAsync(stream);
                         }
 
                     }

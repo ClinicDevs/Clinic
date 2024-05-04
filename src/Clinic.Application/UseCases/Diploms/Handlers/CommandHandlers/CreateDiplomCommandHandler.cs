@@ -12,10 +12,15 @@ using System.Threading.Tasks;
 
 namespace Clinic.Application.UseCases.Diploms.Handlers.CommandHandlers
 {
-    public class CreateDiplomCommandHandler(IClinincDbContext clinincDbContext, IWebHostEnvironment webHostEnvironment) : IRequestHandler<CreateDiplomCommand, ResponseModel>
+    public class CreateDiplomCommandHandler : IRequestHandler<CreateDiplomCommand, ResponseModel>
     {
-        private readonly IClinincDbContext _clinincDbContext = clinincDbContext;
-        private readonly IWebHostEnvironment _webHostEnvironment = webHostEnvironment;
+        private readonly IClinincDbContext _clinincDbContext;
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        public CreateDiplomCommandHandler(IClinincDbContext clinincDbContext, IWebHostEnvironment webHostEnvironment)
+        {
+            _clinincDbContext = clinincDbContext;
+            _webHostEnvironment = webHostEnvironment;
+        }
 
         public async Task<ResponseModel> Handle(CreateDiplomCommand request, CancellationToken cancellationToken)
         {
@@ -34,7 +39,7 @@ namespace Clinic.Application.UseCases.Diploms.Handlers.CommandHandlers
                         filePath = Path.Combine(_webHostEnvironment.WebRootPath, "DiplomPics", fileName);
                         using (var stream = new FileStream(filePath, FileMode.Create))
                         {
-                            await file.CopyToAsync(stream, cancellationToken);
+                            await file.CopyToAsync(stream);
                         }
 
                     }

@@ -7,9 +7,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Clinic.Application.UseCases.Doctors.Handlers.CommandHandlers
 {
-    public class DeleteDoctorCommandHandler(IClinincDbContext clinincDbContext) : IRequestHandler<DeleteDoctorCommand, ResponseModel>
+    public class DeleteDoctorCommandHandler : IRequestHandler<DeleteDoctorCommand, ResponseModel>
     {
-        private readonly IClinincDbContext _clinincDbContext = clinincDbContext;
+        private readonly IClinincDbContext _clinincDbContext;
+
+        public DeleteDoctorCommandHandler(IClinincDbContext clinincDbContext)
+        {
+            _clinincDbContext = clinincDbContext;
+        }
 
         public async Task<ResponseModel> Handle(DeleteDoctorCommand request, CancellationToken cancellationToken)
         {

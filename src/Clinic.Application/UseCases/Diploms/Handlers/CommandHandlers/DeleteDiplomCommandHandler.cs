@@ -11,9 +11,14 @@ using System.Threading.Tasks;
 
 namespace Clinic.Application.UseCases.Diploms.Handlers.CommandHandlers
 {
-    public class DeleteDiplomCommandHandler(IClinincDbContext clinincDbContext) : IRequestHandler<DeleteDiplomCommand, ResponseModel>
+    public class DeleteDiplomCommandHandler : IRequestHandler<DeleteDiplomCommand, ResponseModel>
     {
-        private readonly IClinincDbContext _clinincDbContext = clinincDbContext;
+        private readonly IClinincDbContext _clinincDbContext;
+
+        public DeleteDiplomCommandHandler(IClinincDbContext clinincDbContext)
+        {
+            _clinincDbContext = clinincDbContext;
+        }
 
         public async Task<ResponseModel> Handle(DeleteDiplomCommand request, CancellationToken cancellationToken)
         {
