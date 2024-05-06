@@ -50,18 +50,18 @@ namespace Clinic.API
             });
 
             var logger = new LoggerConfiguration()
-    .ReadFrom.Configuration(builder.Configuration)
-    .Enrich.FromLogContext()
-    .CreateLogger();
+                .ReadFrom.Configuration(builder.Configuration)
+                .Enrich.FromLogContext()
+                .CreateLogger();
             //builder.Logging.ClearProviders();
             builder.Logging.AddSerilog(logger);
             builder.Services.AddControllers();
 
             builder.Services.AddControllers()
-   .AddJsonOptions(options =>
-   {
-       options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
-   });
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+                });
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
@@ -96,7 +96,7 @@ namespace Clinic.API
                 {
                     if (!roleManager.RoleExistsAsync(role).Result)
                     {
-                         roleManager.CreateAsync(new IdentityRole(role)).Wait();
+                        roleManager.CreateAsync(new IdentityRole(role)).Wait();
                     }
                 }
             }
