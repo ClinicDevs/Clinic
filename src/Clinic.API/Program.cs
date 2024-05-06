@@ -21,7 +21,6 @@ namespace Clinic.API
             builder.Services.AddClinicInfrastructureDdependencyInjection(builder.Configuration);
             builder.Services.AddClinicApplicationDependencyInjection();
 
-
             builder.Services.AddRateLimiter(x =>
             {
                 x.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
@@ -77,8 +76,7 @@ namespace Clinic.API
 
             app.UseHttpsRedirection();
 
-            app.UseRateLimiter();
-
+            //app.UseRateLimiter();
             app.UseCors();
 
             app.UseStaticFiles();

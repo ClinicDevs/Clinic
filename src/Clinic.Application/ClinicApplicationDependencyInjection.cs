@@ -25,9 +25,8 @@ namespace Clinic.Application
             });
 
             services.AddSingleton<IWriteToTelegramBotService,WriteToTelegramBotService>();
-            services.AddScoped<IAuthService, AuthService>();
-            services.AddDistributedMemoryCache();
 
+            services.AddScoped<IAuthService, AuthService>();
             return services;
         }
     }
