@@ -57,6 +57,7 @@ namespace Clinic.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginDTO login)
         {
+            //throw new Exception();
             if (!ModelState.IsValid)
             {
                 throw new Exception();
