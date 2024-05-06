@@ -1,10 +1,12 @@
 
+using Clinic.API.Middlewares;
 using Clinic.Application;
 using Clinic.Domain.Entities.Auth;
 using Clinic.Infrastructure;
 using Clinic.Infrastructure.Persistance;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.RateLimiting;
+using Serilog;
 using System.Text.Json.Serialization;
 
 namespace Clinic.API
@@ -48,6 +50,14 @@ namespace Clinic.API
                 });
             });
 
+            var logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(builder.Configuration)
+    .Enrich.FromLogContext()
+    .CreateLogger();
+            //builder.Logging.ClearProviders();
+            builder.Logging.AddSerilog(logger);
+            builder.Services.AddControllers();
+
             builder.Services.AddControllers()
    .AddJsonOptions(options =>
    {
@@ -63,6 +73,7 @@ namespace Clinic.API
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+            //app.UseMiddleware<GlobalExceptionHandler>();
 
             app.UseHttpsRedirection();
 
