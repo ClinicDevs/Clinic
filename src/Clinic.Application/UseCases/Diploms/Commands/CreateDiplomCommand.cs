@@ -12,7 +12,7 @@ namespace Clinic.Application.UseCases.Diploms.Commands
     public class CreateDiplomCommand : IRequest<ResponseModel>
     {
         public string LitsenzyaId { get; set; }
-        public IFormFile? Picture { get; set; }
         public Guid DoctorId { get; set; }
+        public IFormFile? Picture { get; set; }
     }   
 }

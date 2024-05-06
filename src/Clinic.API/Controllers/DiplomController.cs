@@ -18,7 +18,7 @@ namespace Clinic.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ResponseModel> CreateDiplom(CreateDiplomCommand request)
+        public async Task<ResponseModel> CreateDiplom([FromBody] CreateDiplomCommand request)
         {
             return await _mediator.Send(request);
         }
@@ -26,10 +26,10 @@ namespace Clinic.API.Controllers
         [HttpGet]
         public async Task<IEnumerable<Diplom>> GetAllDiplom(int pageIndex, int size)
         {
-            return await _mediator.Send(new GetAllDiplomsQuery 
-            { 
-                PageIndex=pageIndex,
-                Size=size
+            return await _mediator.Send(new GetAllDiplomsQuery
+            {
+                PageIndex = pageIndex,
+                Size = size
             });
         }
 
@@ -48,10 +48,13 @@ namespace Clinic.API.Controllers
             return await _mediator.Send(request);
         }
 
-        [HttpDelete]
-        public async Task<ResponseModel> DeleteDiplom(DeleteDiplomCommand request)
+        [HttpDelete("{id}")]
+        public async Task<ResponseModel> DeleteDiplom(Guid id)
         {
-            return await _mediator.Send(request);
+            return await _mediator.Send(new DeleteDiplomCommand()
+            {
+                Id = id
+            });
         }
     }
 }

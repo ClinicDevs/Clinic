@@ -27,11 +27,12 @@ namespace Clinic.API.Controllers
         [HttpGet]
         public async Task<IEnumerable<Service>> GetAllServices(int pageIndex,int size)
         {
-            return await _mediatr.Send(new GetAllServicesQuery
+            var s =  await _mediatr.Send(new GetAllServicesQuery()
             {
                 PageIndex= pageIndex,
                 Size=size
             });
+            return s;
         }
 
         [HttpGet]
