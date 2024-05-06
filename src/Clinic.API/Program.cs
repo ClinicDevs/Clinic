@@ -13,7 +13,7 @@ namespace Clinic.API
 {
     public class Program
     {
-        public static async Task Main(string[] args)
+        public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -27,8 +27,8 @@ namespace Clinic.API
 
                 x.AddTokenBucketLimiter("bucket", options =>
                 {
-                    options.ReplenishmentPeriod = TimeSpan.FromSeconds(60);
-                    options.TokenLimit = 60;
+                    options.ReplenishmentPeriod = TimeSpan.FromSeconds(10);
+                    options.TokenLimit = 5;
                     options.TokensPerPeriod = 20;
                     options.AutoReplenishment = true;
                 });
@@ -76,7 +76,7 @@ namespace Clinic.API
 
             app.UseHttpsRedirection();
 
-            //app.UseRateLimiter();
+            app.UseRateLimiter();
             app.UseCors();
 
             app.UseStaticFiles();
@@ -94,9 +94,9 @@ namespace Clinic.API
 
                 foreach (var role in roles)
                 {
-                    if (!await roleManager.RoleExistsAsync(role))
+                    if (!roleManager.RoleExistsAsync(role).Result)
                     {
-                        await roleManager.CreateAsync(new IdentityRole(role));
+                         roleManager.CreateAsync(new IdentityRole(role)).Wait();
                     }
                 }
             }
@@ -109,7 +109,7 @@ namespace Clinic.API
                 string email = "admin@admin.com";
                 string password = "Admin001!";
 
-                if (await userManager.FindByEmailAsync(email) == null)
+                if (userManager.FindByEmailAsync(email).Result == null)
                 {
                     var user = new User()
                     {
@@ -121,9 +121,9 @@ namespace Clinic.API
                         EmailConfirmed = true
                     };
 
-                    await userManager.CreateAsync(user, password);
+                    userManager.CreateAsync(user, password).Wait();
 
-                    await userManager.AddToRoleAsync(user, "Admin");
+                    userManager.AddToRoleAsync(user, "Admin").Wait();
                 }
             }
             app.Run();
