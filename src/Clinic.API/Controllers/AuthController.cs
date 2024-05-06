@@ -4,6 +4,7 @@ using Clinic.Domain.Entities.Auth;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 
 namespace Clinic.API.Controllers
 {
@@ -21,6 +22,8 @@ namespace Clinic.API.Controllers
         }
 
         [HttpPost]
+        [EnableRateLimiting("bucket")]
+
         public async Task<IActionResult> Register(RegisterDTO register)
         {
             if (!ModelState.IsValid)
@@ -55,6 +58,8 @@ namespace Clinic.API.Controllers
         }
 
         [HttpPost]
+        [EnableRateLimiting("bucket")]
+
         public async Task<IActionResult> Login(LoginDTO login)
         {
             if (!ModelState.IsValid)
