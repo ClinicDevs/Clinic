@@ -60,7 +60,7 @@ namespace Clinic.Application.UseCases.Services.Handlers.QueryHandlers
                     // Other serialization options can be set here
                 };
 
-                return JsonSerializer.Deserialize<Service[]>(data, options);
+                return JsonSerializer.Deserialize<IEnumerable<Service>>(data, options);
             }
             catch (Exception ex)
             {

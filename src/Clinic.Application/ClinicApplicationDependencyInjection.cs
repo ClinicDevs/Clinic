@@ -17,6 +17,7 @@ namespace Clinic.Application
         public static IServiceCollection AddClinicApplicationDependencyInjection(this IServiceCollection services)
         {
             services.AddMediatR(Assembly.GetExecutingAssembly());
+            services.AddDistributedMemoryCache();
 
             services.AddSingleton<TelegramBotClient>(provider =>
             {
